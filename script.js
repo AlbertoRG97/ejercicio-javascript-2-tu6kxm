@@ -16,7 +16,7 @@ function onLoad() {
   //Vamos al parent node
   let elementList = document.getElementsByClassName('selected').item(0).parentNode.parentNode;
 
-  //Añadimos la primera clase
+  //Añadimos la primera clase al primer
   let element = elementList.firstElementChild
   element.getElementsByTagName('span').item(0).classList.add("element-1")
 
@@ -51,9 +51,6 @@ function onLoad() {
   }
 
   //Añadimos disabled a los botones
-  let finalList = document.getElementById("list2").children;
-  for(let i = 0; i < finalList.length; i++){
-    finalList[i].firstElementChild.setAttribute("disabled","true");
-  }
+  document.getElementById("list2").lastChild.firstChild.setAttribute("disabled","");
 
 }

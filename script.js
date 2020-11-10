@@ -13,19 +13,47 @@ window.addEventListener("load", onLoad);
 function onLoad() {
   console.log("hi");
 
+  //Vamos al parent node
   let elementList = document.getElementsByClassName('selected').item(0).parentNode.parentNode;
-  console.log(elementList);
 
+  //Añadimos la primera clase
   let element = elementList.firstElementChild
   element.getElementsByTagName('span').item(0).classList.add("element-1")
 
+  //A partir del primer elemento añadimos el resto de clases
   for(let i = 1; i < elementList.children.length; i++){
     element = element.nextElementSibling;
     element.getElementsByTagName('span').item(0).classList.add('element-'+(i+1))
   }
   
-  console.log(elementList.querySelectorAll('li:first-child ,li:last-child'))
-  
+  //Seleccionamos los elementos pares y los borramos
+  let listaNueva = elementList.querySelectorAll("li > span.element-2, li > span.element-4");
+  for(let i = 0; i < listaNueva.length; i++){
+    listaNueva.item(i).parentNode.remove();
+  };
 
+  //Segunda parte de la app
+  //Guardo ambas listas
+  let secondList = document.getElementById("list2");
+  let firstList = document.getElementById("list1");
+
+  //Recorro la primera lista para usarla al crear la segunda
+  for(let i = 0; i < firstList.children.length; i++){
+    //Creamos botones y les damos los mismos valores
+    let boton = document.createElement("button");
+    let botonText = firstList.children.item(i).firstElementChild.textContent;
+    boton.innerText = botonText;
+    boton.classList = firstList.children.item(i).firstElementChild.classList;
+    //Creamos el nuevo elemento y lo añadimos
+    let element = document.createElement("li");
+    secondList.append(element);
+    secondList.children.item(i).appendChild(boton)
+  }
+
+  //Añadimos disabled a los botones
+  let finalList = document.getElementById("list2").children;
+  for(let i = 0; i < finalList.length; i++){
+    finalList[i].firstElementChild.setAttribute("disabled","true");
+  }
 
 }
